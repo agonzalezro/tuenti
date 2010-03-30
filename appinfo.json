@@ -1,9 +1,0 @@
-{
-	"id": "com.mirblusl.tuenti",
-	"version": "1.0.0",
-	"vendor": "mirblu S.L.",
-	"type": "web",
-	"main": "index.html",
-	"title": "Tuenti",
-	"icon": "icon.png"
-}

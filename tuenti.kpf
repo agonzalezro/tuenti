@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Komodo Project File - DO NOT EDIT -->
+<project id="48af973c-adaa-4410-a4bc-bcfb5e03ad5d" kpf_version="4" name="tuenti.kpf">
+<preference-set idref="48af973c-adaa-4410-a4bc-bcfb5e03ad5d">
+  <boolean id="import_live">1</boolean>
+</preference-set>
+</project>

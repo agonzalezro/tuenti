@@ -1,0 +1,17 @@
+{
+	"id": "com.mirblusl.tuenti",
+	"version": "0.1.0",
+	"vendor": "mirblu S.L.",
+	"vendorurl": "http://mirblu.com",
+	"type": "web",
+	"main": "index.html",
+	"title": "Tuenti",
+	"icon": "icon.png",
+	"support": {
+		"url": "http://mirblu.com",
+		"email": {
+		"address": "alex@mirblu.com",
+		"subject": "Tuenti webos app"
+		}
+	}
+}
