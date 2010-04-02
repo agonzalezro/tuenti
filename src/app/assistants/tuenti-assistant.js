@@ -81,7 +81,6 @@ TuentiAssistant.prototype.setup = function() {
 }
 
 function check_news() {
-	Mojo.Log.error("CHECK!");
 	var request = new Ajax.Request("http://m.tuenti.com/?m=login&func=process_login", {
 		method: 'post',
 		parameters: {'tuentiemail': this.tuentiemail, 'password': this.password},
