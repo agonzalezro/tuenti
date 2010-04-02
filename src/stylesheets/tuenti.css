@@ -1,2 +1,4 @@
 /* Put Application specific CSS here. */
 #Pages { position: fixed; bottom: 0px; }
+#progressbar { width: 100%; }
+#Progress { width: 100%; position:fixed; top: 0px; }
