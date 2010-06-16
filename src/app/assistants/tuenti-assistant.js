@@ -3,8 +3,8 @@ function TuentiAssistant() { }
 TuentiAssistant.prototype.setup = function() {
 	this.controller.stageController.setWindowOrientation("free");
 
-	this.wall_showed = false;
-	this.messages_showed = false;
+	this.wall_showed = 0;
+	this.messages_showed = 0;
 	this.cookied_tuentiemail = new Mojo.Model.Cookie('tuentiemail');
     this.cookied_password = new Mojo.Model.Cookie('password');
 	
@@ -108,25 +108,27 @@ TuentiAssistant.prototype.ajaxRequestSuccess = function(transport) {
 	var wall_posts = String(transport.responseText.match("[0-9]+ (wall|nuevo|comentari)|ezu.*[0-9]+"));
 	wall_posts = wall_posts.match("[0-9]+");
 	
-	if ((messages == 1) && (this.messages_showed == false)) {
-		this.messages_showed = true;
-		messages = "1 mensaje privado";
-		this.controller.showBanner({messageText: messages, soundClass: "alerts"}, {}, "");
-	} else if ((messages > 1) && (this.messages_showed == false)) {
-		this.messages_showed = true;
-		messages = messages + " mensajes privados";
-		this.controller.showBanner({messageText: messages, soundClass: "alerts"}, {}, "");
-	}
+    if (messages == 1) { messages = "1 mensaje privado"; }
+    else if (messages > 1) { messages = messages + " mensajes privados"; }
+    
+    if ((messages != 0) && (messages != this.messages_showed)) {
+        //We need this if because if we are reading several messages the alert will be showed. It isn't necessary because we are reading them actually.
+        if (!this.url.match("/?m=messaging")) {
+            this.messages_showed = messages;
+            this.controller.showBanner({messageText: messages, soundClass: "alerts"}, {}, "");
+        }
+    }
+    
+	if (wall_posts == 1) { wall_posts = "1 comentario"; }
+    else if (wall_posts > 1) { wall_posts = wall_post + " comentarios"; }
 	
-	if ((wall_posts ==  1) && (this.wall_showed == false)) {
-		this.wall_showed = true;
-		wall_posts = "1 comentario";
-		this.controller.showBanner({messageText: wall_posts, soundClass: "alerts"}, {}, "");
-	} else if ((messages > 1 )&& (this.wall_showed == false)) {
-		this.wall_showed = true;
-		wall_posts = wall_post + " comentarios";
-		this.controller.showBanner({messageText: wall_posts, soundClass: "alerts"}, {}, "");
-	}
+    if ((wall_posts != 0) && (wall_posts != this.wall_posts)) {
+        //idem
+        if (!this.url.match("/?m=profile&func=my_profile")) {
+            this.wall_showed = wall_posts;
+            this.controller.showBanner({messageText: wall_posts, soundClass: "alerts"}, {}, "");
+        }
+    }
 }
 
 TuentiAssistant.prototype.loadProgressEvent = function(loadEvent) {	
@@ -147,10 +149,10 @@ TuentiAssistant.prototype.loadProgressEvent = function(loadEvent) {
 			if (this.url.match("http://m.tuenti.com/?$|m=home")) 
 				value = 1;
 			else if (this.url.match("/?m=profile&func=my_profile")) {
-				this.wall_showed = false;
+				//this.wall_showed = false;
 				value = 2;
 			} else if (this.url.match("/?m=messaging")) {
-				this.messages_showed = false;
+				//this.messages_showed = false;
 				value = 3;
 			} else 
 				value = -1;
